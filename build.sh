@@ -3,7 +3,7 @@ BIN_VER=2.37
 GCC_VER=11.2.0
 GDB_VER=11.1
 NLIB_VER=4.2.0.20211231
-MAKEOPTS=8
+MAKEOPTS=-j8
 
 target=$1
 echo "Building cross compiler for: $target"

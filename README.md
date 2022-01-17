@@ -22,3 +22,18 @@ Patches/PRs are welcome to improve the script!
 
 Happy Hacking!
 
+# Configuration
+
+There are user configurable variables to specify which version to build.
+```sh
+BIN_VER=2.37
+GCC_VER=11.2.0
+GDB_VER=11.1
+NLIB_VER=4.2.0.20211231
+CORES=8
+```
+- BIN_VER: Binutils Version to build
+- GCC_VER: GCC Version to build
+- GDB_VER: GDB Version to build
+- NLIB_VER: Newlib Version to build
+- CORES: Number of CPU Cores to parallelize jobs

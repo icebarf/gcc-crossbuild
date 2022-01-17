@@ -3,7 +3,7 @@ BIN_VER=2.37
 GCC_VER=11.2.0
 GDB_VER=11.1
 NLIB_VER=4.2.0.20211231
-CORES=8
+MAKEOPTS=8
 
 target=$1
 echo "Building cross compiler for: $target"
@@ -20,7 +20,7 @@ export PATH="$PATH":"$PREFIX/bin"
 mkdir build-bins
 cd build-bins
 ../binutils-$BIN_VER/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror --disable-debuginfod --disable-libdebuginfod
-make -j $CORES
+make  $MAKEOPTS
 make install
 cd ../
 
@@ -36,10 +36,10 @@ fi
 mkdir build-gcc
 cd build-gcc
 ../gcc-$GCC_VER/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers --with-newlib
-make -j $CORES all-gcc
-make -j $CORES all-target-libgcc
-make -j $CORES install-gcc
-make -j $CORES install-target-libgcc
+make  $MAKEOPTS all-gcc
+make  $MAKEOPTS all-target-libgcc
+make  $MAKEOPTS install-gcc
+make  $MAKEOPTS install-target-libgcc
 cd ../
 
 # Newlib
@@ -53,7 +53,7 @@ make install
 cd ../
 
 cd build-gcc
-make -j $CORES all-target-libstdc++-v3
+make  $MAKEOPTS all-target-libstdc++-v3
 make install-target-libstdc++-v3
 cd ../
 
@@ -62,7 +62,7 @@ wget https://ftp.gnu.org/gnu/gdb/gdb-$GDB_VER.tar.xz
 tar -xvf gdb-$GDB_VER.tar.xz
 mkdir build-gdb && cd build-gdb
 ../gdb-$GDB_VER/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --disable-werror
-make -j $CORES
+make  $MAKEOPTS
 make install
 cd ../
 

@@ -17,11 +17,6 @@ chmod +x build.sh
 
 If you don't want to build it yourself, you can download pre-built binaries from [releases](https://github.com/sysfau1t/gcc-crossbuild/releases)
 
-
-Patches/PRs are welcome to improve the script!
-
-Happy Hacking!
-
 # Configuration
 
 There are user configurable variables to specify which version to build.
@@ -30,10 +25,15 @@ BIN_VER=2.37
 GCC_VER=11.2.0
 GDB_VER=11.1
 NLIB_VER=4.2.0.20211231
-CORES=8
+MAKEOPTS= -j8
 ```
 - BIN_VER: Binutils Version to build
 - GCC_VER: GCC Version to build
 - GDB_VER: GDB Version to build
 - NLIB_VER: Newlib Version to build
-- CORES: Number of CPU Cores to parallelize jobs
+- MAKEOPTS: Options for make - eg. `-j8 -O2`
+
+
+Patches/PRs are welcome to improve the script!
+
+Happy Hacking!

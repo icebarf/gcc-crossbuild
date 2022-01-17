@@ -20,7 +20,7 @@ export PATH="$PATH":"$PREFIX/bin"
 mkdir build-bins
 cd build-bins
 ../binutils-$BIN_VER/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror --disable-debuginfod --disable-libdebuginfod
-make  $MAKEOPTS
+make $MAKEOPTS
 make install
 cd ../
 
@@ -36,10 +36,10 @@ fi
 mkdir build-gcc
 cd build-gcc
 ../gcc-$GCC_VER/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers --with-newlib
-make  $MAKEOPTS all-gcc
-make  $MAKEOPTS all-target-libgcc
-make  $MAKEOPTS install-gcc
-make  $MAKEOPTS install-target-libgcc
+make $MAKEOPTS all-gcc
+make $MAKEOPTS all-target-libgcc
+make $MAKEOPTS install-gcc
+make $MAKEOPTS install-target-libgcc
 cd ../
 
 # Newlib
@@ -48,12 +48,12 @@ tar -xvf newlib
 mkdir build-nl
 cd build-nl
 ../newlib-$NLIB_VER/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
-make
+make $MAKEOPTS
 make install
 cd ../
 
 cd build-gcc
-make  $MAKEOPTS all-target-libstdc++-v3
+make $MAKEOPTS all-target-libstdc++-v3
 make install-target-libstdc++-v3
 cd ../
 
@@ -62,7 +62,7 @@ wget https://ftp.gnu.org/gnu/gdb/gdb-$GDB_VER.tar.xz
 tar -xvf gdb-$GDB_VER.tar.xz
 mkdir build-gdb && cd build-gdb
 ../gdb-$GDB_VER/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --disable-werror
-make  $MAKEOPTS
+make $MAKEOPTS
 make install
 cd ../
 

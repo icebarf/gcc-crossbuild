@@ -1,9 +1,5 @@
 name: Build GCC
-on: 
-  push:
-    paths:
-      - 'build.sh'
-      - '.github/workflows/build-gcc.yml'
+on: [workflow_dispatch]
 jobs:
   Build_x86_64:
     runs-on: ubuntu-latest

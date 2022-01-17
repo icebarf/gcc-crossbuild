@@ -1,8 +1,9 @@
-name: Build binutils
+name: Build GCC
 on: 
   push:
     paths:
       - 'build.sh'
+      - '.github/workflows/build-gcc.yml'
 jobs:
   Build_x86_64:
     runs-on: ubuntu-latest
@@ -13,8 +14,8 @@ jobs:
       - name: Building compiler
         run: |
           cd ../
-          cp cross-gcc/build.sh ./
-          cp -r cross-gcc/no-red-zone ./
+          cp gcc-crossbuild/build.sh ./
+          cp -r gcc-crossbuild/no-red-zone ./
           chmod +x build.sh
           ./build.sh x86_64-elf
 
@@ -35,8 +36,8 @@ jobs:
       - name: Building compiler
         run: |
           cd ../
-          cp cross-gcc/build.sh ./
-          cp -r cross-gcc/no-red-zone ./
+          cp gcc-crossbuild/build.sh ./
+          cp -r gcc-crossbuild/no-red-zone ./
           chmod +x build.sh
           ./build.sh riscv64-elf
 
@@ -57,8 +58,8 @@ jobs:
       - name: Building compiler
         run: |
           cd ../
-          cp cross-gcc/build.sh ./
-          cp -r cross-gcc/no-red-zone ./
+          cp gcc-crossbuild/build.sh ./
+          cp -r gcc-crossbuild/no-red-zone ./
           chmod +x build.sh
           ./build.sh aarch64-elf
 

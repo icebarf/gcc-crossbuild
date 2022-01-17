@@ -1,0 +1,72 @@
+name: Build binutils
+on: 
+  push:
+    paths:
+      - 'build.sh'
+jobs:
+  Build_x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install deps
+        run: sudo apt-get install -y libmpc-dev libgmp-dev libmpfr-dev
+      - uses: actions/checkout@v2
+      - name: Building compiler
+        run: |
+          cd ../
+          cp cross-gcc/build.sh ./
+          cp -r cross-gcc/no-red-zone ./
+          chmod +x build.sh
+          ./build.sh x86_64-elf
+
+          tar -cvJf ~/x86_64-elf-gcc-11.2.0.tar.xz -C "$HOME/out/" .
+
+      - name: Uploading build
+        uses: actions/upload-artifact@v2
+        with:
+          name: x86_64-elf-gcc-11.2.0.tar.xz
+          path: ~/x86_64-elf-gcc-11.2.0.tar.xz
+      
+  Build_riscv64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install deps
+        run: sudo apt-get install -y libmpc-dev libgmp-dev libmpfr-dev
+      - uses: actions/checkout@v2
+      - name: Building compiler
+        run: |
+          cd ../
+          cp cross-gcc/build.sh ./
+          cp -r cross-gcc/no-red-zone ./
+          chmod +x build.sh
+          ./build.sh riscv64-elf
+
+          tar -cvJf ~/riscv64-elf-gcc-11.2.0.tar.xz -C "$HOME/out/" .
+
+      - name: Uploading build
+        uses: actions/upload-artifact@v2
+        with:
+          name: riscv64-elf-gcc-11.2.0.tar.xz
+          path: ~/riscv64-elf-gcc-11.2.0.tar.xz
+
+  Build_aarch64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install deps
+        run: sudo apt-get install -y libmpc-dev libgmp-dev libmpfr-dev
+      - uses: actions/checkout@v2
+      - name: Building compiler
+        run: |
+          cd ../
+          cp cross-gcc/build.sh ./
+          cp -r cross-gcc/no-red-zone ./
+          chmod +x build.sh
+          ./build.sh aarch64-elf
+
+          tar -cvJf ~/aarch64-elf-gcc-11.2.0.tar.xz -C "$HOME/out/" .
+
+      - name: Uploading build
+        uses: actions/upload-artifact@v2
+        with:
+          name: aarch64-elf-gcc-11.2.0.tar.xz
+          path: ~/aarch64-elf-gcc-11.2.0.tar.xz
+
